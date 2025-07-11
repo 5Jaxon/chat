@@ -23,8 +23,12 @@ const io = new Server(3002, {
 
 
 io.on('connection', (socket) => {
-  console.log(`user${socket.id} connected`);
+  console.log(`user ${socket.id} connected`);
   socket.on('disconnect', () => {
-    console.log(`user${socket.id} disconnected`);
+    console.log(`user ${socket.id} disconnected`);
   });
+  socket.on('message', (data) => {
+    io.emit('messageResponse', data);
+  })
 });
+
