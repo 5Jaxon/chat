@@ -59,14 +59,14 @@
 .chat__sidebar {
   height: 100%;
   background: linear-gradient(0deg, #dde3f8, #ebf5fa);
-  flex: 0.15;
+  width: 250px;
   padding: 20px;
   border-right: 1px solid #fdfdfd;
 }
 
 .chat__main {
   height: 100%;
-  flex: 0.85;
+  flex: 1;
 }
 
 .chat__header {
@@ -180,9 +180,6 @@
   text-align: right;
 }
 
-.message__status {
-  position: fixed;
-  bottom: 50px;
-  font-size: 13px;
-  font-style: italic;
+.recipient__name {
+  text-align: left;
 }

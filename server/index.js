@@ -21,14 +21,21 @@ const io = new Server(3002, {
   }
 });
 
+let users = [];
 
 io.on('connection', (socket) => {
   console.log(`user ${socket.id} connected`);
   socket.on('disconnect', () => {
-    console.log(`user ${socket.id} disconnected`);
+    users = users.filter((user) => user.socketID !== socket.id);
+    io.emit('newUserResponse', users);
+    socket.disconnect();
   });
   socket.on('message', (data) => {
     io.emit('messageResponse', data);
+  });
+  socket.on('newUser', (data) => {
+    users.push(data);
+    io.emit('newUserResponse', users);
   })
 });
 

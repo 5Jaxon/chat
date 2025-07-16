@@ -10,7 +10,7 @@ const ChatPage = ({socket}) => {
   useEffect(() => {
     const handler = (data) => {
       setMessage([...message, data]);
-      console.log(message);
+      console.log([...message, data]);
       
    };
     socket.on('messageResponse', handler);
@@ -20,7 +20,7 @@ const ChatPage = ({socket}) => {
     <div className='chat'>
       <ChatBar/>
       <div className='chat__main'>
-        <ChatBody message={message}></ChatBody>
+        <ChatBody messages={message}></ChatBody>
         <ChatFooter></ChatFooter>
       </div>
     </div>

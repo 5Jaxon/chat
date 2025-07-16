@@ -14,7 +14,7 @@ function App() {
       <Context value={socket}>
         <BrowserRouter>
           <Routes>
-            <Route path='/' element={<Home />}></Route>
+            <Route path='/' element={<Home socket={socket} />}></Route>
             <Route path='/chat' element={<ChatPage socket={socket} />}></Route>
             <Route path='*' element={<NotFound />}></Route>
           </Routes>

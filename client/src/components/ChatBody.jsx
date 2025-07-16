@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 
-const ChatBody = () => {
+const ChatBody = ({messages}) => {
   const navigate = useNavigate();
 
   const handleLeave = () => {
-    localStorage.removeItem('name');
+    sessionStorage.removeItem('name');
     navigate('/');
     window.location.reload();
   }
@@ -18,23 +18,24 @@ const ChatBody = () => {
       </header>
 
       <div className="message__container">
-        <div className="message__chats">
-          <p className="sender__name">you</p>
-          <div className="message__sender">
-            <p>hello</p>
-          </div>
-        </div>
-        
-        <div className="message__chats">
-          <p>ta</p>
-          <div className="message__recipient">
-            <p>hi</p>
-          </div>
-        </div>
-      </div>
+        { messages.map((message) => 
+          message.socketID === sessionStorage.getItem('id') ? (
+            <div className="message__chats" key={message.id}>
+              <p className="sender__name">you</p>
+              <div className="message__sender">
+                <p>{message.text}</p>
+              </div>
+            </div>
+          ) : (
+            <div className="message__chats">
+              <p className="recipient__name">{message.name}</p>
+              <div className="message__recipient">
+                <p>{message.text}</p>
+              </div>
+            </div>
+          )
+        )}
 
-      <div className="message_status">
-        <p>someone is typing...</p>
       </div>
 
     </div>

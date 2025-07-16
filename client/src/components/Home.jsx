@@ -1,11 +1,14 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-const Home = () => {
+const Home = ({socket}) => {
   const navigate = useNavigate();
   const [name, setName] = useState('');
 
-  const handleSubmit = () => {
-    localStorage.setItem('userName', name);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    sessionStorage.setItem('userName', name);
+    sessionStorage.setItem('id', socket.id);    
+    socket.emit('newUser', {userName: name, socketID: socket.id })
     navigate('chat');    
   }
 
